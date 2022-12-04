@@ -1,0 +1,2 @@
+module gfgPOTD {
+}
