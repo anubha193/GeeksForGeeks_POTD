@@ -1,0 +1,68 @@
+class Solution
+{
+    public int[][] chefAndWells(int n,int m,char c[][])
+    {
+      int delrow[]={1,-1,0,0};
+      int delcol[]={0,0,-1,1};
+      int dis[][]=new int[n][m];
+     for(int r[]:dis)
+     Arrays.fill(r,Integer.MAX_VALUE);
+      Queue<tuple> q=new LinkedList<>();
+     for(int i=0;i<n;i++)
+     {
+         for(int j=0;j<m;j++)
+         {
+             if(c[i][j]== 'W')
+             {
+                 dis[i][j]=0;
+                 q.add(new tuple(i,j,0));
+             }
+         }
+     }
+     while(!q.isEmpty())
+     {
+         int row=q.peek().first;
+         int col=q.peek().second;
+         int d=q.peek().third;
+         q.poll();
+         for(int i=0;i<4;i++)
+         {
+             int newrow=row+delrow[i];
+             int newcol=col+delcol[i];
+             if(newrow>=0 && newrow<n && newcol>=0 && newcol<m && (c[newrow][newcol]=='H'|| c[newrow][newcol]=='.'))
+             {
+               if(dis[newrow][newcol]>dis[row][col]+2)
+               {
+                  dis[newrow][newcol]=dis[row][col]+2; 
+                  q.add(new tuple(newrow,newcol, dis[newrow][newcol]));
+               }
+             }
+        }
+     }
+      for(int i=0;i<n;i++)
+     {
+         for(int j=0;j<m;j++)
+         {
+             if(dis[i][j]==Integer.MAX_VALUE)
+             dis[i][j]=-1;
+             if(c[i][j]== '.' || c[i][j]=='N')
+             {
+                 dis[i][j]=0;
+             }
+         }
+     }
+     return dis;
+    }
+}
+class tuple
+{
+    int first;
+    int second;
+    int third;
+    public tuple(int first,int second,int third)
+    {
+        this.first=first;
+        this.second=second;
+        this.third=third;
+    }
+}
