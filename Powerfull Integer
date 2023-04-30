@@ -1,0 +1,25 @@
+class Solution{
+    public static int powerfullInteger(int n,int arr[][],int k)
+    {
+      int max=Integer.MIN_VALUE;
+      for(int i=0;i<n;i++)
+      {
+          max=Math.max(max,arr[i][1]);
+      }
+      int fre[]=new int[max+2];
+      for(int i=0;i<n;i++)
+      {
+          int left=arr[i][0];
+          int right=arr[i][1];
+          fre[left]++;
+          fre[right+1]--;
+      }
+      int ans=-1;
+      for(int i=1;i<fre.length;i++)
+      {
+          fre[i]=fre[i-1]+fre[i];
+          if(fre[i]>=k)ans=i;
+      }
+      return ans;
+    }
+}
