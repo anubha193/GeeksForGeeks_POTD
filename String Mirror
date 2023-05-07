@@ -1,0 +1,29 @@
+class Solution {
+    public static String stringMirror(String str) {
+        // code here
+        int j=0;
+        char ch=str.charAt(0),ch1;
+        int len=str.length();
+        String rev=""+ch;
+        for(int i=1;i<len;i++)
+        {
+            ch=str.charAt(i);
+            ch1=rev.charAt(j);
+            if(ch>ch1)
+            break;
+            if(ch==ch1 && ch==str.charAt(0))
+            break;
+            else
+            {
+                rev=rev+ch;
+                j++;
+            }
+        }
+        String rev1=rev;
+        StringBuilder sb=new StringBuilder(rev1);
+        sb.reverse();
+        sb.toString();
+        return rev=rev+sb;
+    }
+}
+        
