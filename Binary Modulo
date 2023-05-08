@@ -1,0 +1,18 @@
+class Solution{
+	int modulo(String s, int m) {
+		//Write your code here
+		int ans=0;
+		int t=1;
+		for(int i=s.length()-1;i>=0;i--)
+		{
+		    if(s.charAt(i)=='1')
+		    {
+		      ans=(ans+t)%m;  
+		    }
+		    t=(t*2)%m;
+		    
+		}
+		ans=ans%m;
+		return ans;
+	}
+}
