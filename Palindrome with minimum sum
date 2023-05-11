@@ -1,0 +1,22 @@
+class Solution {
+    public static int minimumSum(String s) {
+        // code here
+             int i=0,j=s.length()-1,ans=0;
+        char prev=s.charAt(0);
+        while(i<j){
+            if(s.charAt(i)!='?'&&s.charAt(j)!='?'&&s.charAt(j)!=s.charAt(i)){
+                return -1;
+            }
+            else{
+                char cur=(s.charAt(i)=='?'?s.charAt(j):s.charAt(i));
+                if(cur!='?'){
+                    if(prev!='?')ans+=Math.abs(prev-cur);
+                    prev=cur;
+                }
+            }
+            i++;
+            j--;
+        }
+        return 2*ans;
+    }
+}
