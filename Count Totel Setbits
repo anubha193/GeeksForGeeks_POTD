@@ -1,0 +1,21 @@
+class Solution {
+    public static long countBits(long N) {
+        // code here
+        long count=0;
+        for(long i=1;i<=N;i++)
+        {
+            count+=setBit(i);
+        }
+        return count;
+    }
+    static long setBit(long n)
+    {
+        long count=0;
+        while(n!=0)
+        {
+            n=n&(n-1);
+            count++;
+        }
+        return count;
+    }
+}
