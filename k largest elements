@@ -1,0 +1,39 @@
+class Solution {
+    int[] kLargest(int[] arr, int n, int k) {
+        // code here
+        PriorityQueue<Integer> pq=new PriorityQueue<>();
+        for(int i=0;i<k;i++)
+        pq.add(arr[i]);
+        for(int i=k;i<n;i++)
+        {
+            if(arr[i]>pq.peek())
+            {
+                pq.poll();
+                pq.add(arr[i]);
+            }
+        }
+        int[] al=new int[pq.size()];
+        int i=0;
+        while(!pq.isEmpty())
+        {
+            al[i]=pq.peek();
+            i++;
+            pq.poll();
+        }
+        reverse(al);
+        return al;
+    }
+    public void reverse(int arr[])
+    {
+        int j=arr.length-1;
+        int i=0;
+        while(i<j)
+        {
+            int temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+            i++;
+            j--;
+        }
+    }
+}
