@@ -1,0 +1,79 @@
+class Solution
+{
+    static Node tar=null;
+   static HashMap<Node,Node> parent(Node root,int target)
+    {
+        HashMap<Node,Node> hm=new HashMap<>();
+        Queue<Node> q=new LinkedList<>();
+        q.add(root);
+        if(root.data==target)tar=root;
+        while(!q.isEmpty())
+        {
+            Node temp=q.poll();
+             if(temp.left!=null)
+            {
+                q.add(temp.left);
+                hm.put(temp.left,temp);
+                if(temp.left.data==target)
+                tar=temp.left;
+            }
+            if(temp.right!=null)
+            {
+                q.add(temp.right);
+                hm.put(temp.right,temp);
+                if(temp.right.data==target)
+                tar=temp.right;
+            }
+        }
+        return hm;
+        
+    }
+    public static ArrayList<Integer> KDistanceNodes(Node root, int target , int k)
+    {
+        // return the sorted list of all nodes at k dist
+        ArrayList<Integer> al=new ArrayList<>();
+        HashMap<Node,Node>parent=parent(root,target);
+        Queue<Node> q=new LinkedList<>();
+        int curr=0;
+        q.add(tar);
+         Map<Node,Boolean> visit=new HashMap<>();
+         visit.put(tar,true);
+      while(!q.isEmpty())
+         {
+        	 int size=q.size();
+        	 if(curr==k)
+        		 break;
+        	 curr++;
+        	 for(int i=0;i<size;i++)
+        	 {
+        		 Node temp=q.poll();
+        		 if(temp.left!=null && visit.get(temp.left)==null)
+        		 {
+        			 q.offer(temp.left);
+        			 visit.put(temp.left, true);
+        			}
+        		 if(temp.right!=null && visit.get(temp.right)==null)
+        		 {
+        			
+        			 q.offer(temp.right);
+        			 visit.put(temp.right, true);
+        		 }
+        		 if(parent.get(temp)!=null && visit.get(parent.get(temp))==null)
+        		 {
+        			 q.offer(parent.get(temp));
+        			 visit.put(parent.get(temp), true);
+        			
+        		 }
+        	 }
+        	 
+         }
+    	 while(!q.isEmpty())
+    	 {
+    		 Node c=q.poll();
+    		 al.add(c.data);
+    		
+    	 }
+    	 Collections.sort(al);
+       return al;
+    }
+};
