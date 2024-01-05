@@ -1,0 +1,21 @@
+
+class Solution
+{
+    long mod=1000000007;
+    public int TotalWays(int n)
+    {
+        // Code here
+        if(n==1)return 4;
+        if(n==2)return 9;
+        long a=2;
+        long b=3;
+        long c=0;
+        for(int i=3;i<=n;i++)
+        {
+            c=(a%mod+b%mod)%mod;
+            a=b%mod;
+            b=c%mod;
+        }
+        return (int)((c*c)%mod);
+    }
+}
