@@ -1,5 +1,3 @@
-package potd;
-
 public class AlternateVowelAndConsonants {
 	public static String rearrange(String S, int N){
         int[] arr1 = new int[26];
